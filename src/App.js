@@ -1,7 +1,7 @@
 import "./App.css";
 
 import React from "react";
-import ImportDataModal from "./ImportDataModal";
+import ImportDataModal from "./components/ImportDataModal";
 
 const App = () => {
   return (
