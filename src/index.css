@@ -4,7 +4,6 @@
 @tailwind utilities;
 
 #wrapper {
-  width: 600px;
   min-height: 300px;
 }
 
@@ -24,7 +23,21 @@
   -webkit-animation: spinner 1.5s linear infinite;
   animation: spinner 1.5s linear infinite;
 }
-
+.bg-primary{
+  background:#14a38b;
+}
+.text-primary{
+  color:#14a38b;
+}
+.text-org{
+  color: rgb(245, 106, 0);
+}
+.w-90{
+  width: 90%;
+}
+.bg-primary-opacity-50{
+  background:#14a38b2e;
+}
 @-webkit-keyframes spinner {
   0% {
     -webkit-transform: rotate(0deg);
