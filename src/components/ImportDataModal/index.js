@@ -181,17 +181,17 @@ const Modal = () => {
                                 )}
 
                                 <div className="py-2 bg-white bg-whtie m-auto rounded-lg">
-                                  <a
-                                    href="index.html"
-                                    className="text-black hover:underline"
+                                  <div
+                                    style={{
+                                      display: "flex",
+                                      alignItems: "center",
+                                      justifyContent: "center",
+                                      marginTop: "5px",
+                                    }}
                                   >
-                                    <div
-                                      style={{
-                                        display: "flex",
-                                        alignItems: "center",
-                                        justifyContent: "center",
-                                        marginTop: "5px",
-                                      }}
+                                    <a
+                                      href="index.html"
+                                      className="text-black hover:underline"
                                     >
                                       <span
                                         style={{
@@ -213,9 +213,10 @@ const Modal = () => {
                                           />
                                         </svg>
                                       </span>
+
                                       <span>Download Sample Templete</span>
-                                    </div>
-                                  </a>
+                                    </a>
+                                  </div>
                                 </div>
                                 <div className="py-2 text-center">
                                   <button

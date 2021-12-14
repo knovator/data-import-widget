@@ -15,6 +15,7 @@ const useImportData = () => {
   useEffect(() => {
     console.log("Fetching Data from Server");
     Axios.get("https://jsonplaceholder.typicode.com/users")
+      // Axios.get("https://api.dataimport.knovator.in/v1/projects")
       .then((response) => {
         console.log(`response`, response.data);
         setTempletList(response.data);
