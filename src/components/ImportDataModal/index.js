@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import useImportData from "./hooks/useImportData";
 import Spiner from "../Spinner/buttonSpinner";
 import FullSpiner from "../Spinner/fullSpinner";
+import { Toaster } from "react-hot-toast";
 
 const Modal = () => {
   const [showModal, setShowModal] = useState(false);
@@ -18,6 +19,7 @@ const Modal = () => {
 
   return (
     <>
+      <Toaster />
       <button
         className="bg-primary text-white active:bg-pink-600 font-bold uppercase text-sm px-6 py-3 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
         type="button"
@@ -64,7 +66,7 @@ const Modal = () => {
                             </option>
                             {templetList.map((temp) => {
                               return (
-                                <option key={temp.id} value={temp.id}>
+                                <option key={temp._id} value={temp._id}>
                                   {temp.name}
                                 </option>
                               );
@@ -74,7 +76,7 @@ const Modal = () => {
                       </div>
                       <div className="col-span-6">
                         <FullSpiner loader={loading}>
-                          {templetData?.templet && (
+                          {templetData?.templetId && (
                             <div>
                               <div className="flex items-center gap-3">
                                 <div className="h-12 w-12 rounded-2xl bg-primary-opacity-50 flex items-center justify-center text-primary">
@@ -146,7 +148,7 @@ const Modal = () => {
                                   </div>
                                 </div>
 
-                                {templetData.file?.name !== "" && (
+                                {templetData.files?.name !== "" && (
                                   <div
                                     className="text-gray-400 text-sm"
                                     style={{
@@ -176,7 +178,7 @@ const Modal = () => {
                                         />
                                       </svg>
                                     </span>
-                                    <span>{templetData.file?.name}</span>
+                                    <span>{templetData.files?.name}</span>
                                   </div>
                                 )}
 
@@ -222,7 +224,7 @@ const Modal = () => {
                                   <button
                                     type="submit"
                                     className={`${
-                                      templetData.file.name === ""
+                                      templetData.files.name === ""
                                         ? "bg-gray-400 cursor-not-allowed"
                                         : "bg-primary cursor-pointer"
                                     } flex items-center text  text-white border border-gray-300 rounded font-semibold  mx-auto px-4 shadow-md`}
