@@ -1,70 +1,68 @@
 import React, { useState } from "react";
 import useImportData from "./hooks/useImportData";
-import Spiner from "../Spinner/buttonSpinner";
-import FullSpiner from "../Spinner/fullSpinner";
+import Spinner from "../Spinner/buttonSpinner";
+import FullSpinner from "../Spinner/fullSpinner";
 import { Toaster } from "react-hot-toast";
 
-const Modal = () => {
+const Modal = (props) => {
   const [showModal, setShowModal] = useState(false);
 
   const {
-    templetList,
-    handleTempletChange,
-    templetData,
+    templateList,
+    templateData,
+    handleTemplateChange,
+    handleFileUpload,
     handleSubmit,
-    handleFileUplaod,
-    loader,
     loading,
-  } = useImportData();
+  } = useImportData(props);
 
   return (
     <>
       <Toaster />
-      <button
-        className="bg-primary text-white active:bg-pink-600 font-bold uppercase text-sm px-6 py-3 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
-        type="button"
+      <span
+        className="px-6 py-3 mb-1 mr-1 text-sm font-bold text-white uppercase transition-all duration-150 ease-linear rounded shadow outline-none bg-primary active:bg-pink-600 hover:shadow-lg focus:outline-none"
         onClick={() => setShowModal(true)}
       >
-        import
-      </button>
+        {props.children}
+      </span>
       {showModal ? (
         <>
-          <div className="justify-center items-center flex overflow-y-auto fixed inset-0 z-50 outline-none focus:outline-none">
+          <div className="fixed inset-0 z-50 flex items-center justify-center overflow-y-auto outline-none focus:outline-none">
             <form onSubmit={handleSubmit} className="w-90">
               <div className="w-auto">
-                <div className="border-0 rounded-lg shadow-lg relative flex flex-col w-full bg-white outline-none focus:outline-none">
+                <div className="relative flex flex-col w-full bg-white border-0 rounded-lg shadow-lg outline-none focus:outline-none">
                   {/*header*/}
-                  <div className="flex items-center justify-between p-3 border-b border-solid border-blueGray-200 rounded-t">
+                  <div className="flex items-center justify-between p-3 border-b border-solid rounded-t border-blueGray-200">
                     <h3 className="text-xl font-semibold">Import Data</h3>
                     <button
-                      className="ml-auto border-0 text-black float-right text-3xl"
+                      className="float-right ml-auto text-3xl text-black border-0"
                       onClick={() => setShowModal(false)}
                     >
-                      <span className="bg-transparent text-black h-2 w-6">
+                      <span className="w-6 h-2 text-black bg-transparent">
                         ×
                       </span>
                     </button>
                   </div>
                   {/*body*/}
 
-                  <div className="relative p-3 flex-auto">
+                  <div className="relative flex-auto p-3">
                     <div id="wrapper" className="grid grid-cols-12 gap-4">
                       <div className="col-span-6">
                         <div className="">
-                          <label className="block text-sm font-medium text-gray-700 mb-1">
+                          <label className="block mb-1 text-sm font-medium text-gray-700">
                             Select Templete
                           </label>
                           <select
                             id="templet_id"
                             name="templet_id"
                             defaultValue="Select Templete"
-                            onChange={(id) => handleTempletChange(id)}
-                            className="block w-full p-2 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+                            onChange={(id) => handleTemplateChange(id)}
+                            className="block w-full p-2 bg-white border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
                           >
                             <option value="" hidden>
                               Select templete
                             </option>
-                            {templetList.map((temp) => {
+                            {templateList.map((temp) => {
                               return (
                                 <option key={temp._id} value={temp._id}>
                                   {temp.name}
@@ -75,14 +73,14 @@ const Modal = () => {
                         </div>
                       </div>
                       <div className="col-span-6">
-                        <FullSpiner loader={loading}>
-                          {templetData?.templetId && (
+                        <FullSpinner loading={loading}>
+                          {templateData?.templateId && (
                             <div>
                               <div className="flex items-center gap-3">
-                                <div className="h-12 w-12 rounded-2xl bg-primary-opacity-50 flex items-center justify-center text-primary">
+                                <div className="flex items-center justify-center w-12 h-12 rounded-2xl bg-primary-opacity-50 text-primary">
                                   <svg
                                     xmlns="http://www.w3.org/2000/svg"
-                                    className="h-5 w-5"
+                                    className="w-5 h-5"
                                     viewBox="0 0 20 20"
                                     fill="currentColor"
                                   >
@@ -98,11 +96,11 @@ const Modal = () => {
                                 </div>
                                 <p className="font-bold ">Upload your file</p>
                               </div>
-                              <div className="py-4 bg-white m-auto">
-                                <div className="file_upload px-5 py-10 relative rounded-lg border-2 border-dashed">
+                              <div className="py-4 m-auto bg-white">
+                                <div className="relative px-5 py-10 border-2 border-dashed rounded-lg file_upload">
                                   <svg
                                     className={`${
-                                      loader ? "text-gray-300" : "text-primary"
+                                      loading ? "text-gray-300" : "text-primary"
                                     } w-8 mx-auto mb-2`}
                                     xmlns="http://www.w3.org/2000/svg"
                                     fill="none"
@@ -116,27 +114,27 @@ const Modal = () => {
                                       d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12"
                                     />
                                   </svg>
-                                  <div className="input_field flex flex-col text-center">
+                                  <div className="flex flex-col text-center input_field">
                                     <label className="mb-2">
                                       <input
-                                        className="text-sm cursor-pointer w-36 hidden"
+                                        className="hidden text-sm cursor-pointer w-36"
                                         type="file"
-                                        onChange={handleFileUplaod}
-                                        disabled={loader ? true : false}
+                                        onChange={handleFileUpload}
+                                        disabled={loading ? true : false}
                                       />
 
                                       <div
                                         className={`${
-                                          loader ? "bg-gray-400 " : "bg-primary"
+                                          loading ? "bg-gray-400 " : "bg-primary"
                                         } items-center justify-center text text-white  border border-gray-300 rounded font-semibold cursor-pointer p-1 px-5 inline-flex shadow-md`}
                                       >
-                                        <Spiner loader={loader}></Spiner> Select
+                                        <Spinner loading={loading}></Spinner> Select
                                       </div>
                                     </label>
 
                                     <div
                                       className={`${
-                                        loader
+                                        loading
                                           ? "text-gray-400"
                                           : "text-gray-600"
                                       } title uppercase text-xs flex items-center gap-3 justify-center`}
@@ -148,9 +146,9 @@ const Modal = () => {
                                   </div>
                                 </div>
 
-                                {templetData.files?.name !== "" && (
+                                {templateData.files?.name !== "" && (
                                   <div
-                                    className="text-gray-400 text-sm"
+                                    className="text-sm text-gray-400"
                                     style={{
                                       display: "flex",
                                       alignItems: "center",
@@ -165,7 +163,7 @@ const Modal = () => {
                                     >
                                       <svg
                                         xmlns="http://www.w3.org/2000/svg"
-                                        className="h-4 w-4"
+                                        className="w-4 h-4"
                                         fill="none"
                                         viewBox="0 0 24 24"
                                         stroke="currentColor"
@@ -178,11 +176,11 @@ const Modal = () => {
                                         />
                                       </svg>
                                     </span>
-                                    <span>{templetData.files?.name}</span>
+                                    <span>{templateData.files?.name}</span>
                                   </div>
                                 )}
 
-                                <div className="py-2 bg-white bg-whtie m-auto rounded-lg">
+                                <div className="py-2 m-auto bg-white rounded-lg bg-whtie">
                                   <div
                                     style={{
                                       display: "flex",
@@ -203,7 +201,7 @@ const Modal = () => {
                                       >
                                         <svg
                                           xmlns="http://www.w3.org/2000/svg"
-                                          className="h-4 w-4"
+                                          className="w-4 h-4"
                                           fill="none"
                                           viewBox="0 0 24 24"
                                           stroke="currentColor"
@@ -224,7 +222,7 @@ const Modal = () => {
                                   <button
                                     type="submit"
                                     className={`${
-                                      templetData.files.name === ""
+                                      templateData.files.name === ""
                                         ? "bg-gray-400 cursor-not-allowed"
                                         : "bg-primary cursor-pointer"
                                     } flex items-center text  text-white border border-gray-300 rounded font-semibold  mx-auto px-4 shadow-md`}
@@ -235,7 +233,7 @@ const Modal = () => {
                               </div>
                             </div>
                           )}
-                        </FullSpiner>
+                        </FullSpinner>
                       </div>
                     </div>
                   </div>
@@ -243,7 +241,7 @@ const Modal = () => {
               </div>
             </form>
           </div>
-          <div className="opacity-25 fixed inset-0 z-40 bg-black"></div>
+          <div className="fixed inset-0 z-40 bg-black opacity-25"></div>
         </>
       ) : null}
     </>

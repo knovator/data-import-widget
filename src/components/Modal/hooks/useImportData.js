@@ -2,13 +2,13 @@ import { useState, useEffect } from "react";
 import Axios from "axios";
 import toast from "react-hot-toast";
 
-const useImportData = () => {
-  const [templetList, setTempletList] = useState([]);
+const useImportData = (props) => {
+  const [templateList, setTemplateList] = useState([]);
   const [loader, setLoader] = useState(false);
   const [loading, setLoading] = useState(false);
 
-  const [templetData, setTempletData] = useState({
-    templetId: "",
+  const [templateData, setTemplateData] = useState({
+    templateId: "",
     files: { name: "" },
   });
 
@@ -17,40 +17,37 @@ const useImportData = () => {
     Axios.get("https://api.dataimport.knovator.in/v1/projects/STRING_ERP")
       .then(({ data: response }) => {
         // console.log(`response`, response);
-        setTempletList(response.templates);
+        setTemplateList(response.templates);
       })
       .catch((err) => {
         console.error(err);
       });
   }, []);
 
-  const handleTempletChange = (templetId) => {
-    // console.log("templetId", templetId.target.value);
-    setTempletData({
-      ...templetData,
-      templetId: templetId.target.value,
-    });
+  const handleTemplateChange = (templateId) => {
+    setTemplateData((prev) => ({
+      ...prev,
+      templateId: templateId.target.value,
+    }));
   };
 
-  const handleFileUplaod = async (event) => {
-    let fileObj = event.target.files[0];
-    setTempletData({
-      ...templetData,
-      files: fileObj,
-    });
+  const handleFileUpload = async (event) => {
+    let file = event.target.files[0];
+    setTemplateData((prev) => ({
+      ...prev,
+      files: file,
+    }));
   };
 
   const handleSubmit = async (event) => {
     event.preventDefault();
-    // console.log(`templetData`, templetData);
-
-    if (templetData.templetId) {
+    if (templateData.templateId) {
       try {
         setLoading(true);
         const formData = new FormData();
-        formData.append("files", templetData.files);
+        formData.append("files", templateData.files);
         let response = await Axios.post(
-          `https://api.dataimport.knovator.in/v1/templates/${templetData.templetId}/process-file`,
+          `https://api.dataimport.knovator.in/v1/templates/${templateData.templateId}/process-file`,
           formData
         );
         console.log(`response`, response);
@@ -65,12 +62,12 @@ const useImportData = () => {
   };
 
   return {
-    templetList,
-    handleTempletChange,
-    setTempletData,
-    templetData,
+    templateList,
+    handleTemplateChange,
+    setTemplateData,
+    templateData,
     handleSubmit,
-    handleFileUplaod,
+    handleFileUpload,
     loader,
     loading,
     setLoader,

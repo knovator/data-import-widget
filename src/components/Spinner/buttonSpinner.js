@@ -1,11 +1,11 @@
 import React from "react";
 
-let Spinner = ({ loader = false, children }) => {
+let Spinner = ({ loading = false, children }) => {
   return (
     <React.Fragment>
-      {loader && (
-        <div className="flex justify-center items-center">
-          <div className="animate-spin rounded-full h-3 w-3 border-t-2 border-b-2 border-white-500 m-2"></div>
+      {loading && (
+        <div className="flex items-center justify-center">
+          <div className="w-3 h-3 m-2 border-t-2 border-b-2 rounded-full animate-spin border-white-500"></div>
         </div>
       )}
       {children}

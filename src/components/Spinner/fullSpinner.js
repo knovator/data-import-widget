@@ -1,12 +1,12 @@
 import React from "react";
 
-let Spinner = ({ loader = false, children }) => {
+const Spinner = ({ loading = false, children }) => {
   return (
     <React.Fragment>
-      {loader && (
-        <div className="fixed top-0 left-0 right-0 bottom-0 w-full h-full z-50 overflow-hidden bg-gray-700 opacity-75 flex flex-col items-center justify-center">
-          <div className="loader ease-linear rounded-full border-4 border-t-4 border-gray-200 h-12 w-12 mb-4"></div>
-          <h2 className="text-center text-white text-xl font-semibold">
+      {loading && (
+        <div className="fixed top-0 bottom-0 left-0 right-0 z-50 flex flex-col items-center justify-center w-full h-full overflow-hidden bg-gray-700 opacity-75">
+          <div className="w-12 h-12 mb-4 ease-linear border-4 border-t-4 border-gray-200 rounded-full loader"></div>
+          <h2 className="text-xl font-semibold text-center text-white">
             Loading...
           </h2>
           <p className="w-1/3 text-center text-white">

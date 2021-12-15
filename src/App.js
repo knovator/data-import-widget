@@ -1,14 +1,6 @@
-import "./App.css";
+import Modal from "./components/Modal";
+import "./../index.css";
+import React from 'react'
 
-import React from "react";
-import ImportDataModal from "./components/ImportDataModal";
-
-const App = () => {
-  return (
-    <div>
-      <ImportDataModal />
-    </div>
-  );
-};
-
+const App = (props) => <Modal {...props} />;
 export default App;
