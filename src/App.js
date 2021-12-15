@@ -1,6 +1,7 @@
 import Modal from "./components/Modal";
-import "./../index.css";
+import "./../output.css";
+import "./../custom.css";
 import React from 'react'
 
 const App = (props) => <Modal {...props} />;
-export default App;
+export default Modal;

@@ -1,57 +1,5 @@
 /* ./src/index.css */
-@tailwind base;
+/* @tailwind base; */
 @tailwind components;
 @tailwind utilities;
 
-#wrapper {
-  min-height: 300px;
-}
-
-#left {
-  float: left;
-  width: 250px;
-  overflow: hidden;
-}
-
-#right {
-  width: 350px;
-  overflow: hidden;
-}
-
-.loader {
-  border-top-color: #3498db;
-  -webkit-animation: spinner 1.5s linear infinite;
-  animation: spinner 1.5s linear infinite;
-}
-.bg-primary{
-  background:#14a38b;
-}
-.text-primary{
-  color:#14a38b;
-}
-.text-org{
-  color: rgb(245, 106, 0);
-}
-.w-90{
-  width: 90%;
-}
-.bg-primary-opacity-50{
-  background:#14a38b2e;
-}
-@-webkit-keyframes spinner {
-  0% {
-    -webkit-transform: rotate(0deg);
-  }
-  100% {
-    -webkit-transform: rotate(360deg);
-  }
-}
-
-@keyframes spinner {
-  0% {
-    transform: rotate(0deg);
-  }
-  100% {
-    transform: rotate(360deg);
-  }
-}
