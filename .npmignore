@@ -1,0 +1,10 @@
+config/*
+node_modules/*
+package-lock.json
+LICENSE
+.editorconfig
+.babelrc 
+.cache/*
+tsconfog.json
+yarn.lock
+public
