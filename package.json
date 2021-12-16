@@ -1,13 +1,12 @@
 {
-  "name": "@knovator/data-import",
+  "name": "@knovator/data-import-widget",
   "version": "0.0.1",
   "private": true,
   "main": "./dist/app.js",
   "dependencies": {
-    "@knovator/api": "^0.0.3",
-    "axios": "^0.24.0",
-    "react-hot-toast": "^2.1.1",
+    "@knovator/api": "^0.0.4",
     "react-scripts": "^4.0.0",
+    "react-toast": "^1.0.3",
     "xlsx": "^0.17.4"
   },
   "scripts": {
@@ -38,9 +37,9 @@
     "@babel/preset-react": "^7.16.5",
     "autoprefixer": "^10.4.0",
     "postcss": "^8.4.5",
-    "tailwindcss": "^3.0.2",
     "react": "^17.0.0",
-    "react-dom": "^17.0.0"
+    "react-dom": "^17.0.0",
+    "tailwindcss": "^3.0.2"
   },
   "peerDependencies": {
     "react": "^17.0.0",

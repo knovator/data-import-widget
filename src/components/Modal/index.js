@@ -1,15 +1,18 @@
-import Axios from "axios";
 import React, { Component } from "react";
-import toast, { Toaster } from "react-hot-toast";
 import Spinner from "../Spinner/buttonSpinner";
 import FullSpinner from "../Spinner/fullSpinner";
 import fetchUrl, { setAPIConfig } from "@knovator/api";
+// import { ToastContainer, toast } from 'react-toast'
 
 setAPIConfig({
   getToken: "",
   prefix: "v1",
+  // baseUrl: `http://localhost:1111`,
+  handleCache: false,
   baseUrl: `https://api.dataimport.knovator.in/`,
 });
+
+// const wave = () => toast('Hi there 👋')
 
 class Modal extends Component {
   constructor(props) {
@@ -50,65 +53,68 @@ class Modal extends Component {
     });
   };
 
+  notify = (data) => {
+    if (typeof this.props.onNotify === "function") {
+      this.props.onNotify(data);
+    }
+  };
+
   handleSubmit = async (event) => {
     event.preventDefault();
     const { selectedTemplate } = this.state;
+    let additionalData = {};
+
+    if (typeof this.props.getAdditionalInfo === "function") {
+      additionalData = this.props.getAdditionalInfo();
+    }
+
     if (selectedTemplate.templateId) {
       try {
         this.updateState({ loading: true });
         const formData = new FormData();
         formData.append("files", selectedTemplate.files);
-        let response = await Axios.post(
-          `https://api.dataimport.knovator.in/v1/templates/${selectedTemplate.templateId}/process-file`,
-          formData
-        );
-        console.log(`response`, response);
-        toast("File is uploaded to Server. Update will be notified by Email");
-      } catch ({ message }) {
-        // console.log(message);
-        toast(message);
+        formData.append("additionalData", JSON.stringify(additionalData));
+        const response = await fetchUrl({
+          url: `templates/${selectedTemplate.templateId}/process-file`,
+          data: formData,
+          method: "post",
+        });
+        this.notify({
+          type: "success",
+          payload: response,
+        });
+      } catch (error) {
+        this.notify({
+          type: "error",
+          payload: error,
+        });
       } finally {
         this.updateState({ loading: false });
       }
     }
   };
 
-  componentDidMount() {
+  async componentDidMount() {
     const { projectCode = "STRING_ERP" } = this.props;
-    fetchUrl({
+    const data = await fetchUrl({
       url: `projects/${projectCode}`,
-    }).then((res) => console.log(";sds", res));
-    Axios.get("https://api.dataimport.knovator.in/v1/projects/STRING_ERP")
-      .then(({ data = {} }) => {
-        const { templates } = data;
-        this.updateState({ templates });
-      })
-      .catch((err) => {
-        console.error(err);
-      });
+      config: {
+        handleCache: false,
+      },
+    });
+    const { templates = [] } = data || {};
+    this.updateState({ templates });
   }
 
   setShow = (show) => {
     this.updateState({ show });
   };
 
-  // const {
-  //   templateList,
-  //   templateData,
-  //   handleTemplateChange,
-  //   handleFileUpload,
-  //   handleSubmit,
-  //   loading,
-  // } = useImportData(props);
-
-  // return <>
-  // hello package worked</>
   render() {
     const { show, loading, templates = [], selectedTemplate = {} } = this.state;
 
     return (
       <div id="data-import">
-        {/* <Toaster /> */}
         <span onClick={() => this.setShow(true)}>{this.props.children}</span>
         {show ? (
           <>
