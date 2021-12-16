@@ -15,8 +15,6 @@ var _fullSpinner = _interopRequireDefault(require("../Spinner/fullSpinner"));
 
 var _api = _interopRequireWildcard(require("@knovator/api"));
 
-var _reactToast = require("react-toast");
-
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _getRequireWildcardCache(nodeInterop) { if (typeof WeakMap !== "function") return null; var cacheBabelInterop = new WeakMap(); var cacheNodeInterop = new WeakMap(); return (_getRequireWildcardCache = function _getRequireWildcardCache(nodeInterop) { return nodeInterop ? cacheNodeInterop : cacheBabelInterop; })(nodeInterop); }
@@ -52,18 +50,6 @@ function _isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Re
 function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
 
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
-
-(0, _api.setAPIConfig)({
-  getToken: "",
-  prefix: "v1",
-  // baseUrl: `http://localhost:1111`,
-  handleCache: false,
-  baseUrl: "https://api.dataimport.knovator.in/"
-});
-
-var wave = function wave() {
-  return (0, _reactToast.toast)('Hi there 👋');
-};
 
 var Modal = /*#__PURE__*/function (_Component) {
   _inherits(Modal, _Component);
@@ -121,9 +107,15 @@ var Modal = /*#__PURE__*/function (_Component) {
       };
     }());
 
+    _defineProperty(_assertThisInitialized(_this), "notify", function (data) {
+      if (typeof _this.props.onNotify === "function") {
+        _this.props.onNotify(data);
+      }
+    });
+
     _defineProperty(_assertThisInitialized(_this), "handleSubmit", /*#__PURE__*/function () {
       var _ref2 = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee2(event) {
-        var selectedTemplate, additionalData, formData, response, message;
+        var selectedTemplate, additionalData, formData, response;
         return regeneratorRuntime.wrap(function _callee2$(_context2) {
           while (1) {
             switch (_context2.prev = _context2.next) {
@@ -137,7 +129,7 @@ var Modal = /*#__PURE__*/function (_Component) {
                 }
 
                 if (!selectedTemplate.templateId) {
-                  _context2.next = 23;
+                  _context2.next = 22;
                   break;
                 }
 
@@ -159,34 +151,39 @@ var Modal = /*#__PURE__*/function (_Component) {
 
               case 12:
                 response = _context2.sent;
-                // axios.post(`http://localhost:1111/v1/templates/${selectedTemplate.templateId}/process-file`, formData
-                // )
-                (0, _reactToast.toast)("File is uploaded to Server. Update will be notified by Email");
-                _context2.next = 20;
+
+                _this.notify({
+                  type: "success",
+                  payload: response
+                });
+
+                _context2.next = 19;
                 break;
 
               case 16:
                 _context2.prev = 16;
                 _context2.t0 = _context2["catch"](5);
-                message = _context2.t0.message;
-                // console.log(message);
-                (0, _reactToast.toast)(message);
 
-              case 20:
-                _context2.prev = 20;
+                _this.notify({
+                  type: "error",
+                  payload: _context2.t0
+                });
+
+              case 19:
+                _context2.prev = 19;
 
                 _this.updateState({
                   loading: false
                 });
 
-                return _context2.finish(20);
+                return _context2.finish(19);
 
-              case 23:
+              case 22:
               case "end":
                 return _context2.stop();
             }
           }
-        }, _callee2, null, [[5, 16, 20, 23]]);
+        }, _callee2, null, [[5, 16, 19, 22]]);
       }));
 
       return function (_x2) {
@@ -218,15 +215,22 @@ var Modal = /*#__PURE__*/function (_Component) {
     key: "componentDidMount",
     value: function () {
       var _componentDidMount = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee3() {
-        var _this$props$projectCo, projectCode, data, _ref4, _ref4$templates, templates;
+        var _this$props, _this$props$getToken, getToken, _this$props$apiPrefix, apiPrefix, _this$props$apiBaseUr, apiBaseUrl, _this$props$projectCo, projectCode, data, _ref3, _ref3$templates, templates;
 
         return regeneratorRuntime.wrap(function _callee3$(_context3) {
           while (1) {
             switch (_context3.prev = _context3.next) {
               case 0:
+                // configurative @knovator/api
+                _this$props = this.props, _this$props$getToken = _this$props.getToken, getToken = _this$props$getToken === void 0 ? "" : _this$props$getToken, _this$props$apiPrefix = _this$props.apiPrefix, apiPrefix = _this$props$apiPrefix === void 0 ? "v1" : _this$props$apiPrefix, _this$props$apiBaseUr = _this$props.apiBaseUrl, apiBaseUrl = _this$props$apiBaseUr === void 0 ? "https://api.dataimport.knovator.in" : _this$props$apiBaseUr;
+                (0, _api.setAPIConfig)({
+                  getToken: getToken,
+                  prefix: apiPrefix,
+                  handleCache: false,
+                  baseUrl: apiBaseUrl
+                });
                 _this$props$projectCo = this.props.projectCode, projectCode = _this$props$projectCo === void 0 ? "STRING_ERP" : _this$props$projectCo;
-                wave();
-                _context3.next = 4;
+                _context3.next = 5;
                 return (0, _api.default)({
                   url: "projects/".concat(projectCode),
                   config: {
@@ -234,14 +238,14 @@ var Modal = /*#__PURE__*/function (_Component) {
                   }
                 });
 
-              case 4:
+              case 5:
                 data = _context3.sent;
-                _ref4 = data || {}, _ref4$templates = _ref4.templates, templates = _ref4$templates === void 0 ? [] : _ref4$templates;
+                _ref3 = data || {}, _ref3$templates = _ref3.templates, templates = _ref3$templates === void 0 ? [] : _ref3$templates;
                 this.updateState({
                   templates: templates
                 });
 
-              case 7:
+              case 8:
               case "end":
                 return _context3.stop();
             }

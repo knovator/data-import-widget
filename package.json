@@ -1,6 +1,6 @@
 {
   "name": "@knovator/data-import-widget",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "private": false,
   "main": "./dist/app.js",
   "author": "VimLeSai <desai.vimal250@gmail.com> (https://knovator.com/)",
@@ -23,6 +23,15 @@
       "react-app"
     ]
   },
+  "keywords": [
+    "data import",
+    "excel import",
+    "excel to json",
+    "database",
+    "excel to database",
+    "knovator",
+    "vimlesai"
+  ],
   "browserslist": {
     "production": [
       ">0.2%",

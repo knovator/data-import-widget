@@ -9,3 +9,7 @@ tsconfog.json
 yarn.lock
 public
 src
+tailwind.config.js
+Authers.md
+CONTRIBUTING.md
+index.css

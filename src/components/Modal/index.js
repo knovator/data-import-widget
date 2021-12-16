@@ -2,17 +2,6 @@ import React, { Component } from "react";
 import Spinner from "../Spinner/buttonSpinner";
 import FullSpinner from "../Spinner/fullSpinner";
 import fetchUrl, { setAPIConfig } from "@knovator/api";
-// import { ToastContainer, toast } from 'react-toast'
-
-setAPIConfig({
-  getToken: "",
-  prefix: "v1",
-  // baseUrl: `http://localhost:1111`,
-  handleCache: false,
-  baseUrl: `https://api.dataimport.knovator.in/`,
-});
-
-// const wave = () => toast('Hi there 👋')
 
 class Modal extends Component {
   constructor(props) {
@@ -95,6 +84,15 @@ class Modal extends Component {
   };
 
   async componentDidMount() {
+    // configurative @knovator/api
+    const { getToken = "", apiPrefix = "v1", apiBaseUrl = "https://api.dataimport.knovator.in" } = this.props
+    setAPIConfig({
+      getToken,
+      prefix: apiPrefix,
+      handleCache: false,
+      baseUrl: apiBaseUrl,
+    });
+
     const { projectCode = "STRING_ERP" } = this.props;
     const data = await fetchUrl({
       url: `projects/${projectCode}`,

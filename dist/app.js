@@ -5,19 +5,13 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.default = void 0;
 
-var _Modal = _interopRequireDefault(require("./components/Modal"));
+require("./../custom.css");
 
 require("./../output.css");
 
-require("./../custom.css");
-
-var _react = _interopRequireDefault(require("react"));
+var _Modal = _interopRequireDefault(require("./components/Modal"));
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-var App = function App(props) {
-  return /*#__PURE__*/_react.default.createElement(_Modal.default, props);
-};
 
 var _default = _Modal.default;
 exports.default = _default;
