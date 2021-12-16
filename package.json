@@ -1,9 +1,13 @@
 {
   "name": "@knovator/data-import-widget",
   "version": "0.0.1",
-  "private": true,
+  "private": false,
   "main": "./dist/app.js",
   "author": "VimLeSai <desai.vimal250@gmail.com> (https://knovator.com/)",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/knovator/data-import"
+  },
   "dependencies": {
     "@knovator/api": "^0.0.4",
     "react-scripts": "^4.0.0",
