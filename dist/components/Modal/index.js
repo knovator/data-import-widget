@@ -146,7 +146,7 @@ var Modal = /*#__PURE__*/function (_Component) {
                 return (0, _api.default)({
                   url: "templates/".concat(selectedTemplate.templateId, "/process-file"),
                   data: formData,
-                  method: "post"
+                  type: "post"
                 });
 
               case 12:
