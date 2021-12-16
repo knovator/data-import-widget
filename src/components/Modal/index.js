@@ -66,7 +66,7 @@ class Modal extends Component {
         const response = await fetchUrl({
           url: `templates/${selectedTemplate.templateId}/process-file`,
           data: formData,
-          method: "post",
+          type: "post",
         });
         this.notify({
           type: "success",

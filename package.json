@@ -1,6 +1,6 @@
 {
   "name": "@knovator/data-import-widget",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "private": false,
   "main": "./dist/app.js",
   "author": "VimLeSai <desai.vimal250@gmail.com> (https://knovator.com/)",
