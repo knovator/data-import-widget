@@ -1,0 +1,50 @@
+{
+  "name": "@knovator/data-import-widget",
+  "version": "0.0.1",
+  "private": true,
+  "main": "./dist/app.js",
+  "author": "VimLeSai <desai.vimal250@gmail.com> (https://knovator.com/)",
+  "dependencies": {
+    "@knovator/api": "^0.0.4",
+    "react-scripts": "^4.0.0",
+    "react-toast": "^1.0.3",
+    "xlsx": "^0.17.4"
+  },
+  "scripts": {
+    "build": "npx babel src --out-dir dist",
+    "style": "npx tailwindcss -i ./index.css -o ./output.css --minify"
+  },
+  "eslintConfig": {
+    "extends": [
+      "react-app"
+    ]
+  },
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
+  },
+  "devDependencies": {
+    "@babel/cli": "^7.16.0",
+    "@babel/core": "^7.16.5",
+    "@babel/preset-env": "^7.16.5",
+    "@babel/preset-react": "^7.16.5",
+    "autoprefixer": "^10.4.0",
+    "postcss": "^8.4.5",
+    "react": "^17.0.0",
+    "react-dom": "^17.0.0",
+    "tailwindcss": "^3.0.2"
+  },
+  "peerDependencies": {
+    "react": "^17.0.0",
+    "react-dom": "^17.0.0"
+  },
+  "license": "MIT"
+}
