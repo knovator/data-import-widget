@@ -3,12 +3,13 @@ node_modules/*
 package-lock.json
 LICENSE
 .editorconfig
+.gitignore
 .babelrc 
 .cache/*
 tsconfog.json
 yarn.lock
 public
-src
+src/*
 tailwind.config.js
 Authers.md
 CONTRIBUTING.md

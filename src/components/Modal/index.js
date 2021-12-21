@@ -72,6 +72,7 @@ class Modal extends Component {
           type: "success",
           payload: response,
         });
+        this.updateState({ show: false });
       } catch (error) {
         this.notify({
           type: "error",

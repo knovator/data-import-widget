@@ -129,7 +129,7 @@ var Modal = /*#__PURE__*/function (_Component) {
                 }
 
                 if (!selectedTemplate.templateId) {
-                  _context2.next = 22;
+                  _context2.next = 23;
                   break;
                 }
 
@@ -157,11 +157,15 @@ var Modal = /*#__PURE__*/function (_Component) {
                   payload: response
                 });
 
-                _context2.next = 19;
+                _this.updateState({
+                  show: false
+                });
+
+                _context2.next = 20;
                 break;
 
-              case 16:
-                _context2.prev = 16;
+              case 17:
+                _context2.prev = 17;
                 _context2.t0 = _context2["catch"](5);
 
                 _this.notify({
@@ -169,21 +173,21 @@ var Modal = /*#__PURE__*/function (_Component) {
                   payload: _context2.t0
                 });
 
-              case 19:
-                _context2.prev = 19;
+              case 20:
+                _context2.prev = 20;
 
                 _this.updateState({
                   loading: false
                 });
 
-                return _context2.finish(19);
+                return _context2.finish(20);
 
-              case 22:
+              case 23:
               case "end":
                 return _context2.stop();
             }
           }
-        }, _callee2, null, [[5, 16, 19, 22]]);
+        }, _callee2, null, [[5, 17, 20, 23]]);
       }));
 
       return function (_x2) {
