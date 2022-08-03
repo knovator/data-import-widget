@@ -1,50 +1,76 @@
 {
-  "name": "@knovator/data-import-widget",
-  "version": "0.0.1",
-  "private": true,
-  "main": "./dist/app.js",
-  "author": "VimLeSai <desai.vimal250@gmail.com> (https://knovator.com/)",
-  "dependencies": {
-    "@knovator/api": "^0.0.4",
-    "react-scripts": "^4.0.0",
-    "react-toast": "^1.0.3",
-    "xlsx": "^0.17.4"
-  },
-  "scripts": {
-    "build": "npx babel src --out-dir dist",
-    "style": "npx tailwindcss -i ./index.css -o ./output.css --minify"
-  },
-  "eslintConfig": {
-    "extends": [
-      "react-app"
-    ]
-  },
-  "browserslist": {
-    "production": [
-      ">0.2%",
-      "not dead",
-      "not op_mini all"
+    "name": "@knovator/data-import-widget",
+    "version": "0.1.0",
+    "license": "MIT",
+    "author": "knovator",
+    "main": "dist/index.js",
+    "module": "dist/data-import-widget.esm.js",
+    "typings": "dist/index.d.ts",
+    "files": [
+        "dist",
+        "src",
+        "README.md",
+        "package.json"
     ],
-    "development": [
-      "last 1 chrome version",
-      "last 1 firefox version",
-      "last 1 safari version"
-    ]
-  },
-  "devDependencies": {
-    "@babel/cli": "^7.16.0",
-    "@babel/core": "^7.16.5",
-    "@babel/preset-env": "^7.16.5",
-    "@babel/preset-react": "^7.16.5",
-    "autoprefixer": "^10.4.0",
-    "postcss": "^8.4.5",
-    "react": "^17.0.0",
-    "react-dom": "^17.0.0",
-    "tailwindcss": "^3.0.2"
-  },
-  "peerDependencies": {
-    "react": "^17.0.0",
-    "react-dom": "^17.0.0"
-  },
-  "license": "MIT"
+    "scripts": {
+        "analyze": "size-limit --why",
+        "build": "dts build",
+        "lint": "dts lint",
+        "prepare": "dts build",
+        "size": "size-limit",
+        "start": "dts watch",
+        "test": "dts test --passWithNoTests"
+    },
+    "husky": {
+        "hooks": {
+            "pre-commit": "dts lint"
+        }
+    },
+    "prettier": {
+        "printWidth": 120,
+        "semi": true,
+        "singleQuote": true,
+        "trailingComma": "es5",
+        "tabWidth": 4
+    },
+    "jest": {
+        "testEnvironment": "jsdom"
+    },
+    "peerDependencies": {
+        "react": ">=16"
+    },
+    "engines": {
+        "node": ">=12"
+    },
+    "size-limit": [
+        {
+            "path": "dist/data-import-widget.cjs.production.min.js",
+            "limit": "10 KB"
+        },
+        {
+            "path": "dist/data-import-widget.esm.js",
+            "limit": "10 KB"
+        }
+    ],
+    "devDependencies": {
+        "@size-limit/preset-small-lib": "^8.0.0",
+        "@tsconfig/create-react-app": "^1.0.2",
+        "@tsconfig/recommended": "^1.0.1",
+        "@types/react": "^18.0.15",
+        "@types/react-dom": "^18.0.6",
+        "autoprefixer": "^10.4.8",
+        "dts-cli": "^1.5.2",
+        "husky": "^8.0.1",
+        "postcss": "^8.4.14",
+        "react": "^18.2.0",
+        "react-dom": "^18.2.0",
+        "rollup-plugin-postcss": "^4.0.2",
+        "size-limit": "^8.0.0",
+        "tailwindcss": "^3.1.7",
+        "tslib": "^2.4.0",
+        "typescript": "^4.7.4"
+    },
+    "dependencies": {
+        "@knovator/api": "^0.0.10"
+    }
 }
